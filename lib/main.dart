@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart'; // Required for Firestore/Auth
+// import 'package:firebase_core/firebase_core.dart'; // Required for Firestore/Auth
 import 'features/auth/screens/splash_screen.dart'; // The screen we just built
 
 void main() async {
@@ -8,7 +8,7 @@ void main() async {
   
   // 2. Connects your app to your Firebase project
   // Note: You must run the 'flutterfire configure' command in your terminal first!
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
   runApp(const TemamuApp());
 }
