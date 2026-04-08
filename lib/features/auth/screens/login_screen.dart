@@ -24,10 +24,12 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                "Sign in to continue splitting bills.",
+                "Sign in to start splitting bills.",
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 48),
+
+              // Phone Number Field
               const TextField(
                 decoration: InputDecoration(
                   labelText: "Phone Number",
@@ -37,14 +39,17 @@ class LoginScreen extends StatelessWidget {
                 keyboardType: TextInputType.phone,
               ),
               const SizedBox(height: 20),
+
+              // USERNAME FIELD (Replaced PIN)
               const TextField(
-                obscureText: true,
                 decoration: InputDecoration(
-                  labelText: "Security PIN",
-                  prefixIcon: Icon(Icons.lock_outline),
+                  labelText: "Username",
+                  hintText: "@username",
+                  prefixIcon: Icon(Icons.alternate_email), // The '@' symbol icon
                   border: OutlineInputBorder(),
                 ),
               ),
+              
               const SizedBox(height: 40),
               
               // SIGN IN BUTTON
@@ -59,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Later: Navigate to Home
+                    // Logic to Home later
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
@@ -74,14 +79,9 @@ class LoginScreen extends StatelessWidget {
               ),
 
               const SizedBox(height: 24),
-              
-              // NAVIGATION TO SIGN UP
               Center(
                 child: TextButton(
-                  onPressed: () {
-                    // Moves to the Sign Up screen
-                    Navigator.pushNamed(context, '/signup');
-                  },
+                  onPressed: () => Navigator.pushNamed(context, '/signup'),
                   child: const Text("Don't have an account? Sign Up"),
                 ),
               ),
