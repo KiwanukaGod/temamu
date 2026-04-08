@@ -67,7 +67,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               height: 55,
               child: ElevatedButton(
                 onPressed: () {
-                  // Later: Save user and go to Home
+                  Navigator.pushReplacementNamed(context, '/home');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2563EB),
