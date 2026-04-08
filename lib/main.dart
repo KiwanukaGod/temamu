@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:firebase_core/firebase_core.dart'; // Required for Firestore/Auth
-import 'features/auth/screens/splash_screen.dart'; // The screen we just built
+import 'features/auth/screens/splash_screen.dart';
+import 'features/auth/screens/login_screen.dart'; 
 
 void main() async {
   // 1. Ensures Flutter is ready to call native code (like Firebase)

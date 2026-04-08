@@ -1,7 +1,31 @@
+import 'dart:async'; // Fix 1: Adds the Timer capability
 import 'package:flutter/material.dart';
+import 'login_screen.dart'; // Fix 2: Links to your login file
 
-class SplashScreen extends StatelessWidget {
+// Fix 3: Changed 'StatelessWidget' to 'StatefulWidget'
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _navigateToLogin();
+  }
+
+  void _navigateToLogin() {
+    Timer(const Duration(seconds: 3), () {
+      if (mounted) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
