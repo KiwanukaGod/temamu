@@ -8,13 +8,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String selectedNetwork = 'MTN';
+  // Network selection state removed for now
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // The back arrow in the AppBar will also work automatically!
       appBar: AppBar(
         backgroundColor: Colors.transparent, 
         elevation: 0, 
@@ -27,25 +26,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             const Text(
               "Create Profile", 
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
+              style: TextStyle(
+                fontSize: 32, 
+                fontWeight: FontWeight.bold, 
+                color: Color(0xFF2563EB)
+              )
             ),
             const SizedBox(height: 8),
-            Text("Join Temamu and start paying together.", style: TextStyle(color: Colors.grey[600])),
-            const SizedBox(height: 32),
-            const TextField(decoration: InputDecoration(labelText: "Full Name", border: OutlineInputBorder())),
-            const SizedBox(height: 20),
-            const TextField(decoration: InputDecoration(labelText: "Phone Number", border: OutlineInputBorder())),
-            const SizedBox(height: 20),
-            const Text("Select Network", style: TextStyle(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                _buildNetworkChip("MTN", Colors.amber),
-                const SizedBox(width: 12),
-                _buildNetworkChip("Airtel", Colors.red),
-              ],
+            Text(
+              "Join Temamu and start paying together.", 
+              style: TextStyle(color: Colors.grey[600])
             ),
+            const SizedBox(height: 32),
+
+            // Full Name Input
+            const TextField(
+              decoration: InputDecoration(
+                labelText: "Full Name", 
+                prefixIcon: Icon(Icons.person_outline),
+                border: OutlineInputBorder()
+              )
+            ),
+            const SizedBox(height: 20),
+
+            // Phone Number Input
+            const TextField(
+              decoration: InputDecoration(
+                labelText: "Phone Number", 
+                prefixIcon: Icon(Icons.phone_iphone),
+                border: OutlineInputBorder()
+              ),
+              keyboardType: TextInputType.phone,
+            ),
+            
             const SizedBox(height: 40),
+
+            // SIGN UP BUTTON
             SizedBox(
               width: double.infinity,
               height: 55,
@@ -55,9 +71,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF2563EB),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)
+                  ),
                 ),
-                child: const Text("Create Account", style: TextStyle(color: Colors.white, fontSize: 18)),
+                child: const Text(
+                  "Create Account", 
+                  style: TextStyle(color: Colors.white, fontSize: 18)
+                ),
               ),
             ),
             
@@ -67,7 +88,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Center(
               child: TextButton(
                 onPressed: () {
-                  // Goes back to the previous screen (Login)
                   Navigator.pop(context);
                 },
                 child: const Text("Already have an account? Sign In"),
@@ -75,24 +95,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildNetworkChip(String label, Color color) {
-    bool isSelected = selectedNetwork == label;
-    return ChoiceChip(
-      label: Text(label),
-      selected: isSelected,
-      onSelected: (val) {
-        setState(() {
-          selectedNetwork = label;
-        });
-      },
-      selectedColor: color.withOpacity(0.3),
-      labelStyle: TextStyle(
-        color: isSelected ? color : Colors.black, 
-        fontWeight: FontWeight.bold
       ),
     );
   }
