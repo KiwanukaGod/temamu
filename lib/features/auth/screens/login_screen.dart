@@ -14,13 +14,12 @@ class LoginScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 100),
-              // 1. Branding Header
-              Text(
+              const Text(
                 "Welcome Back",
                 style: TextStyle(
                   fontSize: 32,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF2563EB), // Deep Blue
+                  color: Color(0xFF2563EB),
                 ),
               ),
               const SizedBox(height: 8),
@@ -29,12 +28,9 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
               const SizedBox(height: 48),
-
-              // 2. Input Fields
               const TextField(
                 decoration: InputDecoration(
                   labelText: "Phone Number",
-                  hintText: "e.g., 078XXXXXXX",
                   prefixIcon: Icon(Icons.phone_iphone),
                   border: OutlineInputBorder(),
                 ),
@@ -49,9 +45,9 @@ class LoginScreen extends StatelessWidget {
                   border: OutlineInputBorder(),
                 ),
               ),
-              
-              // 3. Action Button
               const SizedBox(height: 40),
+              
+              // SIGN IN BUTTON
               Container(
                 width: double.infinity,
                 height: 55,
@@ -63,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    // We will add navigation to Home later
+                    // Later: Navigate to Home
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent,
@@ -77,12 +73,14 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
 
-              // 4. Footer
               const SizedBox(height: 24),
+              
+              // NAVIGATION TO SIGN UP
               Center(
                 child: TextButton(
                   onPressed: () {
-                    // Navigate to Signup
+                    // Moves to the Sign Up screen
+                    Navigator.pushNamed(context, '/signup');
                   },
                   child: const Text("Don't have an account? Sign Up"),
                 ),

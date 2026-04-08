@@ -1,8 +1,7 @@
-import 'dart:async'; // Fix 1: Adds the Timer capability
+import 'dart:async'; 
 import 'package:flutter/material.dart';
-import 'login_screen.dart'; // Fix 2: Links to your login file
+import 'login_screen.dart'; 
 
-// Fix 3: Changed 'StatelessWidget' to 'StatefulWidget'
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 

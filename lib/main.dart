@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:firebase_core/firebase_core.dart'; // Required for Firestore/Auth
+
+// Import your screens using the project structure we created
 import 'features/auth/screens/splash_screen.dart';
-import 'features/auth/screens/login_screen.dart'; 
+import 'features/auth/screens/login_screen.dart';
+import 'features/auth/screens/sign_up_screen.dart';
 
-void main() async {
-  // 1. Ensures Flutter is ready to call native code (like Firebase)
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // 2. Connects your app to your Firebase project
-  // Note: You must run the 'flutterfire configure' command in your terminal first!
-  // await Firebase.initializeApp();
-
+void main() {
+  // We removed 'async' and 'Firebase' for now to keep things moving!
   runApp(const TemamuApp());
 }
 
@@ -21,9 +17,9 @@ class TemamuApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Temamu',
-      debugShowCheckedModeBanner: false, // Hides that red 'Debug' banner
+      debugShowCheckedModeBanner: false, // Hides the debug banner
       
-      // 3. Define the Global Fintech Theme
+      // 1. GLOBAL FINTECH THEME
       theme: ThemeData(
         useMaterial3: true,
         primaryColor: const Color(0xFF2563EB), // Deep Blue
@@ -32,23 +28,21 @@ class TemamuApp extends StatelessWidget {
           secondary: const Color(0xFF06B6D4), // Soft Cyan
           surface: Colors.white,
         ),
-        // Modern Typography (Using Inter or system sans-serif)
+        // Setting a clean, modern font style
         textTheme: const TextTheme(
           displayLarge: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E293B)),
           bodyLarge: TextStyle(color: Color(0xFF334155)),
         ),
       ),
 
-      // 4. Set the initial screen
-      home: const SplashScreen(),
-      
-      // 5. Future-proofing with Routes
-      // This is where you will list your Home and Login screens later
+      // 2. NAVIGATION ROUTES
+      // This tells the app exactly what screen to show for each name
+      initialRoute: '/',
       routes: {
-        '/login': (context) => const Placeholder(), // Temporary placeholder
-        '/home': (context) => const Placeholder(),
+        '/': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignUpScreen(),
       },
     );
   }
 }
-
