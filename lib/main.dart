@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'features/auth/screens/splash_screen.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
+import 'features/auth/screens/home_screen.dart'; 
 
 void main() {
   // We removed 'async' and 'Firebase' for now to keep things moving!
@@ -42,6 +43,7 @@ class TemamuApp extends StatelessWidget {
         '/': (context) => const SplashScreen(),
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }
