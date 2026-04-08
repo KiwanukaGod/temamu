@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _selectedIndex = 0;
+  final List<String> _titles = ["Home", "My Pools", "Activity", "Profile"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC), // Very light grey/blue background
+      backgroundColor: const Color(0xFFF8FAFC),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -14,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 24),
-              // 1. HEADER: Personalized Greeting
+              // Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -22,17 +30,18 @@ class HomeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hello, @username",
-                        style: TextStyle(
+                        _selectedIndex == 0 ? "Hello, @username" : _titles[_selectedIndex],
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF1E293B),
                         ),
                       ),
-                      Text(
-                        "Ready to split the bill?",
-                        style: TextStyle(color: Colors.grey[600], fontSize: 16),
-                      ),
+                      if (_selectedIndex == 0)
+                        Text(
+                          "Ready to split the bill?",
+                          style: TextStyle(color: Colors.grey[600], fontSize: 16),
+                        ),
                     ],
                   ),
                   const CircleAvatar(
@@ -42,68 +51,73 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              
               const SizedBox(height: 40),
 
-              // 2. MAIN ACTIONS: Create & Join
-              _buildMainActionCard(
-                context,
-                title: "Create a Pool",
-                subtitle: "Start a new session and invite friends",
-                icon: Icons.add_circle_outline,
-                gradient: const [Color(0xFF2563EB), Color(0xFF1D4ED8)],
-                onTap: () {
-                  // Navigate to Create Pool Flow later
-                },
-              ),
-              const SizedBox(height: 16),
-              _buildMainActionCard(
-                context,
-                title: "Join a Pool",
-                subtitle: "Enter a code or scan a QR to contribute",
-                icon: Icons.qr_code_scanner,
-                gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
-                onTap: () {
-                  // Navigate to Join Pool Flow later
-                },
-              ),
-
-              const SizedBox(height: 48),
-
-              // 3. RECENT ACTIVITY SECTION
-              const Text(
-                "Recent Pools",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF1E293B),
+              // The IF Statement block you were working on
+              if (_selectedIndex == 0) ...[
+                _buildMainActionCard(
+                  context,
+                  title: "Create a Pool",
+                  subtitle: "Start a new session and invite friends",
+                  icon: Icons.add_circle_outline,
+                  gradient: const [Color(0xFF2563EB), Color(0xFF1D4ED8)],
+                  onTap: () {
+                    // We will link this to the Create Pool screen next
+                  },
                 ),
-              ),
-              const SizedBox(height: 16),
-              
-              // Placeholder for a list of recent pools
-              _buildRecentPoolItem("Friday Pork Joint", "Settled • 2 days ago", "UGX 150,000"),
-              _buildRecentPoolItem("Boda Boda Ride", "Settled • Yesterday", "UGX 12,000"),
-              
-              const SizedBox(height: 24),
+                const SizedBox(height: 16),
+                _buildMainActionCard(
+                  context,
+                  title: "Join a Pool",
+                  subtitle: "Enter a code or scan a QR to contribute",
+                  icon: Icons.qr_code_scanner,
+                  gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
+                  onTap: () {},
+                ),
+                const SizedBox(height: 48),
+                const Text(
+                  "Recent Pools",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                _buildRecentPoolItem("Friday Pork Joint", "Settled • 2 days ago", "UGX 150,000"),
+                _buildRecentPoolItem("Boda Boda Ride", "Settled • Yesterday", "UGX 12,000"),
+              ],
+
+              if (_selectedIndex != 0)
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 100),
+                    child: Text(
+                      "Your ${_titles[_selectedIndex]} will appear here.",
+                      style: TextStyle(color: Colors.grey[400]),
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
       ),
-      // 4. BOTTOM NAVIGATION
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: _selectedIndex,
+        onTap: (index) => setState(() => _selectedIndex = index),
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: const Color(0xFF2563EB),
         unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_outlined), label: 'My Pools'),
           BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Activity'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
         ],
       ),
     );
   }
 
-  // Helper Widget for the large buttons
+  // --- HELPER METHODS (These were missing in your screenshot) ---
+
   Widget _buildMainActionCard(
     BuildContext context, {
     required String title,
@@ -136,21 +150,8 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(0.8),
-                      fontSize: 14,
-                    ),
-                  ),
+                  Text(title, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+                  Text(subtitle, style: TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 14)),
                 ],
               ),
             ),
@@ -160,7 +161,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Helper Widget for the list items
   Widget _buildRecentPoolItem(String title, String subtitle, String amount) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
@@ -180,10 +180,7 @@ class HomeScreen extends StatelessWidget {
               Text(subtitle, style: TextStyle(color: Colors.grey[500], fontSize: 13)),
             ],
           ),
-          Text(
-            amount,
-            style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF2563EB)),
-          ),
+          Text(amount, style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF2563EB))),
         ],
       ),
     );
