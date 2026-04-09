@@ -8,7 +8,7 @@ class CreatePoolScreen extends StatefulWidget {
 }
 
 class _CreatePoolScreenState extends State<CreatePoolScreen> {
-  String selectedMethod = 'Equal'; // Default split method
+  String selectedMethod = 'Equal'; 
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
               keyboardType: TextInputType.number,
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 32),
 
             // Section 2: Merchant Info
             const Text("Merchant Details", 
@@ -74,32 +74,43 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
               keyboardType: TextInputType.number,
             ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 32),
 
-            // Section 3: Split Method Selection
+            // Section 3: Split Method Selection (Now with 4 options)
             const Text("Choose Split Method", 
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))),
             const SizedBox(height: 16),
+            
             _buildSplitOption("Equal", "Everyone pays the same amount", Icons.groups_outlined),
             _buildSplitOption("Itemized", "Each person picks what they ate", Icons.receipt_long_outlined),
-            _buildSplitOption("Percentage", "Split by specific percentages", Icons.percent_outlined),
+            _buildSplitOption("Percentage", "Split by agreed responsibility", Icons.percent_outlined),
+            _buildSplitOption("Shared Wallet", "Allow sub-groups to pay together", Icons.account_balance_outlined),
 
             const SizedBox(height: 48),
 
-            // Continue Button
+            // Next Button
             SizedBox(
               width: double.infinity,
               height: 55,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Navigate to Participant Selection next
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2563EB),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF2563EB), Color(0xFF06B6D4)],
+                  ),
                 ),
-                child: const Text("Next: Add Friends", 
-                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Navigation logic
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                  child: const Text("Next: Add Participants", 
+                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                ),
               ),
             ),
             const SizedBox(height: 40),
@@ -115,7 +126,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
       onTap: () => setState(() => selectedMethod = title),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF2563EB).withOpacity(0.05) : Colors.white,
           borderRadius: BorderRadius.circular(16),
@@ -126,7 +137,14 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
         ),
         child: Row(
           children: [
-            Icon(icon, color: isSelected ? const Color(0xFF2563EB) : Colors.grey),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: isSelected ? const Color(0xFF2563EB).withOpacity(0.1) : Colors.grey[50],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(icon, color: isSelected ? const Color(0xFF2563EB) : Colors.grey[400], size: 22),
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -134,14 +152,15 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                 children: [
                   Text(title, style: TextStyle(
                     fontWeight: FontWeight.bold, 
-                    color: isSelected ? const Color(0xFF2563EB) : Colors.black
+                    fontSize: 15,
+                    color: isSelected ? const Color(0xFF2563EB) : const Color(0xFF1E293B)
                   )),
-                  Text(subtitle, style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+                  Text(subtitle, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
                 ],
               ),
             ),
             if (isSelected) 
-              const Icon(Icons.check_circle, color: Color(0xFF2563EB)),
+              const Icon(Icons.check_circle, color: Color(0xFF2563EB), size: 20),
           ],
         ),
       ),
