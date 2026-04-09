@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icons.add_circle_outline,
                   gradient: const [Color(0xFF2563EB), Color(0xFF1D4ED8)],
                   onTap: () {
-                    // Navigation to come
+                    Navigator.pushNamed(context, '/create-pool');
                   },
                 ),
                 const SizedBox(height: 20), // Increased card spacing

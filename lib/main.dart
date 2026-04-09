@@ -5,6 +5,7 @@ import 'features/auth/screens/splash_screen.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
 import 'features/auth/screens/home_screen.dart'; 
+import 'features/auth/screens/create_pool_screen.dart';
 
 void main() {
   // We removed 'async' and 'Firebase' for now to keep things moving!
@@ -44,6 +45,7 @@ class TemamuApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
+        '/create-pool': (context) => const CreatePoolScreen(),
       },
     );
   }
