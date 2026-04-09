@@ -17,87 +17,100 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
       appBar: AppBar(
         title: const Text(
           "New Payment Pool", 
-          style: TextStyle(color: Color(0xFF1E293B), fontWeight: FontWeight.bold)
+          style: TextStyle(color: Color(0xFF1E293B), fontWeight: FontWeight.bold, fontSize: 18)
         ),
         backgroundColor: Colors.white,
         elevation: 0,
+        centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Section 1: Bill Basics
-            const Text(
-              "The Basics", 
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
-            ),
-            const SizedBox(height: 20),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: "Pool Title",
-                hintText: "e.g., Friday Pork Joint",
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.celebration_outlined),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // --- SECTION: THE BASICS ---
+              const Text(
+                "The Basics", 
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
               ),
-            ),
-            const SizedBox(height: 24),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: "Total Bill Amount",
-                hintText: "UGX 0.00",
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.account_balance_wallet_outlined),
-              ),
-              keyboardType: TextInputType.number,
-            ),
-
-            const SizedBox(height: 48),
-
-            // Section 2: Split Method Selection
-            const Text(
-              "Choose Split Method", 
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
-            ),
-            const SizedBox(height: 20),
-            
-            _buildSplitOption("Equal", "Everyone pays the same amount", Icons.groups_outlined),
-            _buildSplitOption("Itemized", "Each person picks what they ate", Icons.receipt_long_outlined),
-            _buildSplitOption("Percentage", "Split by agreed responsibility", Icons.percent_outlined),
-            _buildSplitOption("Shared Wallet", "Allow sub-groups to pay together", Icons.account_balance_outlined),
-
-            const SizedBox(height: 56),
-
-            // Next Button
-            SizedBox(
-              width: double.infinity,
-              height: 58,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF2563EB), Color(0xFF06B6D4)],
-                  ),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    // This will lead to the Participant selection screen
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                  ),
-                  child: const Text(
-                    "Next: Add Participants", 
-                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)
-                  ),
+              const SizedBox(height: 16),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: "Pool Title",
+                  hintText: "e.g., Friday Pork Joint",
+                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+                  prefixIcon: Icon(Icons.celebration_outlined, size: 22),
                 ),
               ),
-            ),
-            const SizedBox(height: 40),
-          ],
+              const SizedBox(height: 16),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: "Total Bill Amount",
+                  hintText: "UGX 0.00",
+                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
+                  prefixIcon: Icon(Icons.account_balance_wallet_outlined, size: 22),
+                ),
+                keyboardType: TextInputType.number,
+              ),
+
+              // This "flex" spacer pushes the next section down proportionally
+              const Spacer(flex: 1),
+
+              // --- SECTION: SPLIT METHODS ---
+              const Text(
+                "Choose Split Method", 
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
+              ),
+              const SizedBox(height: 16),
+              
+              // We'll give each card more vertical breathing room
+              _buildSplitOption("Equal", "Everyone pays the same", Icons.groups_outlined),
+              _buildSplitOption("Itemized", "Pick what you ate", Icons.receipt_long_outlined),
+              _buildSplitOption("Percentage", "Split by responsibility", Icons.percent_outlined),
+              _buildSplitOption("Shared Wallet", "Groups pay together", Icons.account_balance_outlined),
+
+              // This larger flex spacer ensures the button stays at the bottom 
+              // but creates a balanced gap above it
+              const Spacer(flex: 2),
+
+              // --- ACTION BUTTON ---
+              SizedBox(
+                width: double.infinity,
+                height: 58,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF2563EB), Color(0xFF06B6D4)],
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xFF2563EB).withOpacity(0.2),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
+                      )
+                    ]
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // To be linked to Participant Selection
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    ),
+                    child: const Text(
+                      "Next: Add Participants", 
+                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -108,11 +121,11 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
     return GestureDetector(
       onTap: () => setState(() => selectedMethod = title),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 14),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        margin: const EdgeInsets.only(bottom: 12), // Balanced margin
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16), // Premium padding
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF2563EB).withOpacity(0.05) : Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected ? const Color(0xFF2563EB) : const Color(0xFFE2E8F0),
             width: isSelected ? 2 : 1,
@@ -120,17 +133,10 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
         ),
         child: Row(
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: isSelected ? const Color(0xFF2563EB).withOpacity(0.1) : Colors.grey[50],
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Icon(
-                icon, 
-                color: isSelected ? const Color(0xFF2563EB) : Colors.grey[400], 
-                size: 24
-              ),
+            Icon(
+              icon, 
+              color: isSelected ? const Color(0xFF2563EB) : Colors.grey[400], 
+              size: 24
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -145,16 +151,15 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                       color: isSelected ? const Color(0xFF2563EB) : const Color(0xFF1E293B)
                     )
                   ),
-                  const SizedBox(height: 2),
                   Text(
                     subtitle, 
-                    style: TextStyle(color: Colors.grey[500], fontSize: 13)
+                    style: TextStyle(color: Colors.grey[500], fontSize: 12)
                   ),
                 ],
               ),
             ),
             if (isSelected) 
-              const Icon(Icons.check_circle, color: Color(0xFF2563EB), size: 22),
+              const Icon(Icons.check_circle_rounded, color: Color(0xFF2563EB), size: 22),
           ],
         ),
       ),
