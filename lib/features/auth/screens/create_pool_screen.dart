@@ -26,11 +26,13 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // --- SECTION: THE BASICS ---
+              const SizedBox(height: 16), // Padding from AppBar
+
+              // --- SECTION 1: THE BASICS ---
               const Text(
                 "The Basics", 
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
@@ -55,25 +57,24 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                 keyboardType: TextInputType.number,
               ),
 
-              // This "flex" spacer pushes the next section down proportionally
-              const Spacer(flex: 1),
+              // --- THE REQUESTED GAP ---
+              // This 40px gap creates the "Section Break" you're looking for
+              const SizedBox(height: 40), 
 
-              // --- SECTION: SPLIT METHODS ---
+              // --- SECTION 2: CHOOSE OPTION ---
               const Text(
                 "Choose Split Method", 
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
               ),
               const SizedBox(height: 16),
               
-              // We'll give each card more vertical breathing room
               _buildSplitOption("Equal", "Everyone pays the same", Icons.groups_outlined),
               _buildSplitOption("Itemized", "Pick what you ate", Icons.receipt_long_outlined),
               _buildSplitOption("Percentage", "Split by responsibility", Icons.percent_outlined),
               _buildSplitOption("Shared Wallet", "Groups pay together", Icons.account_balance_outlined),
 
-              // This larger flex spacer ensures the button stays at the bottom 
-              // but creates a balanced gap above it
-              const Spacer(flex: 2),
+              // Pushes the button to the bottom while respecting the content above
+              const Spacer(), 
 
               // --- ACTION BUTTON ---
               SizedBox(
@@ -109,6 +110,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 16), // Margin below button
             ],
           ),
         ),
@@ -121,14 +123,14 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
     return GestureDetector(
       onTap: () => setState(() => selectedMethod = title),
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12), // Balanced margin
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16), // Premium padding
+        margin: const EdgeInsets.only(bottom: 10), // Balanced spacing between cards
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: isSelected ? const Color(0xFF2563EB).withOpacity(0.05) : Colors.white,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected ? const Color(0xFF2563EB) : const Color(0xFFE2E8F0),
-            width: isSelected ? 2 : 1,
+            width: isSelected ? 1.5 : 1,
           ),
         ),
         child: Row(
@@ -136,7 +138,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
             Icon(
               icon, 
               color: isSelected ? const Color(0xFF2563EB) : Colors.grey[400], 
-              size: 24
+              size: 22
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -147,7 +149,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                     title, 
                     style: TextStyle(
                       fontWeight: FontWeight.bold, 
-                      fontSize: 16,
+                      fontSize: 15,
                       color: isSelected ? const Color(0xFF2563EB) : const Color(0xFF1E293B)
                     )
                   ),
@@ -159,7 +161,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
               ),
             ),
             if (isSelected) 
-              const Icon(Icons.check_circle_rounded, color: Color(0xFF2563EB), size: 22),
+              const Icon(Icons.check_circle_rounded, color: Color(0xFF2563EB), size: 20),
           ],
         ),
       ),
