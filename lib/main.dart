@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:temamu/features/auth/screens/itemized_split_config_screen.dart';
 
 // Import your screens using the project structure we created
 import 'features/auth/screens/splash_screen.dart';
@@ -46,6 +47,9 @@ class TemamuApp extends StatelessWidget {
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
         '/create-pool': (context) => const CreatePoolScreen(),
+
+        // THE SPLIT PATHS
+         '/itemized-config': (context) => const ItemizedSplitConfigScreen(),
       },
     );
   }

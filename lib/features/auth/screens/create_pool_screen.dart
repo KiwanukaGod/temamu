@@ -96,7 +96,28 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                   ),
                   child: ElevatedButton(
                     onPressed: () {
-                      // To be linked to Participant Selection
+                        // THE TRAFFIC CONTROLLER LOGIC
+                       switch (selectedMethod) {
+                          case 'Equal':
+                            // Equal split is simple, so we go straight to the invite screen
+                            Navigator.pushNamed(context, '/host-invite');
+                          break;
+      
+                          case 'Itemized':
+                            Navigator.pushNamed(context, '/itemized-config');
+                          break;
+      
+                          case 'Percentage':
+                            Navigator.pushNamed(context, '/percentage-config');
+                          break;
+      
+                          case 'Shared Wallet':
+                            Navigator.pushNamed(context, '/wallet-config');
+                          break;
+      
+                          default:
+                          Navigator.pushNamed(context, '/host-invite');
+                        }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
