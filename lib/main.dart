@@ -10,6 +10,7 @@ import 'features/auth/screens/add_participants_screen.dart';
 import 'features/auth/screens/itemized_split_config_screen.dart';
 import 'features/auth/screens/pool_lobby_screen.dart';
 import 'features/auth/screens/percentage_split_config_screen.dart';
+import 'features/auth/screens/shared_wallet.dart';
 void main() {
   // We removed 'async' and 'Firebase' for now to keep things moving!
   runApp(const TemamuApp());
@@ -55,6 +56,7 @@ class TemamuApp extends StatelessWidget {
          '/add-participants': (context) => const AddParticipantsScreen(),
           '/pool-lobby': (context) => const PoolLobbyScreen(),
           '/percentage-config': (context) => const PercentageSplitConfigScreen(),
+          '/wallet-config': (context) => const WalletSplitConfigScreen(),
       },
     );
   }
