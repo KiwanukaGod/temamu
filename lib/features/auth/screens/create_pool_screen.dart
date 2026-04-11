@@ -99,8 +99,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                         // THE TRAFFIC CONTROLLER LOGIC
                        switch (selectedMethod) {
                           case 'Equal':
-                            // Equal split is simple, so we go straight to the invite screen
-                            Navigator.pushNamed(context, '/host-invite');
+                            Navigator.pushNamed(context, '/equal-split');
                           break;
       
                           case 'Itemized':
