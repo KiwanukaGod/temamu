@@ -72,8 +72,8 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                 height: 58,
                 child: ElevatedButton(
                   onPressed: () {
-                    // This leads to the Invite Screen (Share Code/Link)
-                    Navigator.pushNamed(context, '/host-invite');
+                    // This leads to the lobby Screen
+                    Navigator.pushNamed(context, '/pool-lobby');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2563EB),
