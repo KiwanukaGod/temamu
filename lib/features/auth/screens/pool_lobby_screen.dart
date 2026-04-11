@@ -161,6 +161,7 @@ class _PoolLobbyScreenState extends State<PoolLobbyScreen> {
           child: ElevatedButton(
             onPressed: () {
               // Next: Payment Options Screen
+              Navigator.pushNamed(context, '/item-claim');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF2563EB),
