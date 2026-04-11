@@ -101,14 +101,14 @@ class _ItemizedSplitConfigScreenState extends State<ItemizedSplitConfigScreen> {
                 height: 56,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Next step: Host confirms and generates code
-                    Navigator.pushNamed(context, '/host-invite');
+                    // Next step: Host add participants to claim items
+                    Navigator.pushNamed(context, '/add-participants');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2563EB),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                   ),
-                  child: const Text("Confirm & Generate Code", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  child: const Text("Confirm", style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
               const SizedBox(height: 16),

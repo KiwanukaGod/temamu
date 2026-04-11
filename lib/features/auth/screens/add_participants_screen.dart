@@ -80,7 +80,7 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
                   child: const Text(
-                    "Review & Share Link", 
+                    "Enter Lobby", 
                     style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)
                   ),
                 ),

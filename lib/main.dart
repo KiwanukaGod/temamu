@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:temamu/features/auth/screens/itemized_split_config_screen.dart';
 
 // Import your screens using the project structure we created
 import 'features/auth/screens/splash_screen.dart';
@@ -7,6 +6,8 @@ import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
 import 'features/auth/screens/home_screen.dart'; 
 import 'features/auth/screens/create_pool_screen.dart';
+import 'features/auth/screens/add_participants_screen.dart';
+import 'features/auth/screens/itemized_split_config_screen.dart';
 
 void main() {
   // We removed 'async' and 'Firebase' for now to keep things moving!
@@ -50,6 +51,7 @@ class TemamuApp extends StatelessWidget {
 
         // THE SPLIT PATHS
          '/itemized-config': (context) => const ItemizedSplitConfigScreen(),
+         '/add-participants': (context) => const AddParticipantsScreen(),
       },
     );
   }
