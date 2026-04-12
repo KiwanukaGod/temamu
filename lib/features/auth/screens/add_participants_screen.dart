@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
+String generatePoolCode() {
+  var rng = Random();
+  return (rng.nextInt(900000) + 100000).toString();
+}
 class AddParticipantsScreen extends StatefulWidget {
   const AddParticipantsScreen({super.key});
 
@@ -73,7 +78,18 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     // This leads to the lobby Screen
-                    Navigator.pushNamed(context, '/pool-lobby');
+                    String poolCode = generatePoolCode();
+                    // Pass it to the lobby
+                    Navigator.pushNamed(
+                      context,
+                      '/pool-lobby',
+                      arguments: {
+                        'isAdmin': true,
+                        'poolCode': poolCode,
+                        'poolName':
+                        'Friday Pork Joint', // Or whatever variable you have
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2563EB),
