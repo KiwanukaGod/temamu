@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
               subtitle: "Enter a code or scan a QR",
               icon: Icons.qr_code_scanner,
               color: const Color(0xFF06B6D4),
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, '/join-pool'),
             ),
             
             const SizedBox(height: 40),

@@ -19,6 +19,7 @@ import 'features/auth/screens/manual_payment_screen.dart';
 import 'features/auth/screens/admin_settlement_screen.dart';
 import 'features/auth/screens/pool_recap_screen.dart';
 import 'features/auth/screens/notifications_screen.dart'; 
+import 'features/auth/screens/join_pool_screen.dart';
 void main() {
   // We removed 'async' and 'Firebase' for now to keep things moving!
   runApp(const TemamuApp());
@@ -58,6 +59,7 @@ class TemamuApp extends StatelessWidget {
         '/signup': (context) => const SignUpScreen(),
         '/home': (context) => const HomeScreen(),
         '/create-pool': (context) => const CreatePoolScreen(),
+        '/join-pool': (context) => const JoinPoolScreen(),
         '/notifications': (context) => const NotificationsScreen(),
 
         // THE SPLIT PATHS
