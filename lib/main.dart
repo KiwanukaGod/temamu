@@ -16,6 +16,7 @@ import 'features/auth/screens/item_claim_screen.dart';
 import 'features/auth/screens/merchant_payment_screen.dart';
 import 'features/auth/screens/payment_selection_screen.dart';
 import 'features/auth/screens/manual_payment_screen.dart';
+import 'features/auth/screens/admin_settlement_screen.dart';
 void main() {
   // We removed 'async' and 'Firebase' for now to keep things moving!
   runApp(const TemamuApp());
@@ -67,6 +68,7 @@ class TemamuApp extends StatelessWidget {
           '/payment-selection': (context) => const PaymentSelectionScreen(),
           '/merchant-pay': (context) => const MerchantPaymentScreen(),
           '/manual-pay': (context) => const ManualPaymentScreen(),
+          '/admin-settlement': (context) => const AdminSettlementScreen(), 
       },
     );
   }
