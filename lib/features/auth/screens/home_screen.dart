@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'notifications_screen.dart'; // Ensure this file exists!
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,166 +10,145 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  final List<String> _titles = ["Home", "My Pools", "Activity", "Profile"];
+
+  // 1. THE TAB CONTROLLER
+  late final List<Widget> _screens = [
+    _buildHomeBody(),              // Index 0: Dashboard (Actions + Activity)
+    const Center(child: Text("My Pools coming soon")), // Index 1
+    const NotificationsScreen(),    // Index 2: THE NEW NOTIFICATIONS TAB
+    const Center(child: Text("Profile coming soon")),  // Index 3
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // 1. UPDATED HEADER (Simplified and Balanced)
-              const SizedBox(height: 48), // Increased space for a premium feel
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _selectedIndex == 0 ? "Hello, @username" : _titles[_selectedIndex],
-                    style: const TextStyle(
-                      fontSize: 28, // Slightly larger for better balance
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF1E293B),
-                      letterSpacing: -0.5, // Tighter spacing for a modern look
-                    ),
-                  ),
-                  if (_selectedIndex == 0) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      "Ready to split the bill?",
-                      style: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: 16,
-                        letterSpacing: 0.2,
-                      ),
-                    ),
-                  ],
-                ],
-              ),
-              
-              const SizedBox(height: 56), // More breathing room before actions
-
-              // Main Actions (Home Tab only)
-              if (_selectedIndex == 0) ...[
-                _buildMainActionCard(
-                  context,
-                  title: "Create a Pool",
-                  subtitle: "Start a new session and invite friends",
-                  icon: Icons.add_circle_outline,
-                  gradient: const [Color(0xFF2563EB), Color(0xFF1D4ED8)],
-                  onTap: () {
-                    Navigator.pushNamed(context, '/create-pool');
-                  },
-                ),
-                const SizedBox(height: 20), // Increased card spacing
-                _buildMainActionCard(
-                  context,
-                  title: "Join a Pool",
-                  subtitle: "Enter a code or scan a QR to contribute",
-                  icon: Icons.qr_code_scanner,
-                  gradient: const [Color(0xFF06B6D4), Color(0xFF0891B2)],
-                  onTap: () {},
-                ),
-                const SizedBox(height: 56),
-                const Text(
-                  "Recent Pools",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF1E293B),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                _buildRecentPoolItem("Friday Pork Joint", "Settled • 2 days ago", "UGX 150,000"),
-                _buildRecentPoolItem("Boda Boda Ride", "Settled • Yesterday", "UGX 12,000"),
-              ],
-
-              // Content for other tabs
-              if (_selectedIndex != 0)
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 120),
-                    child: Column(
-                      children: [
-                        Icon(Icons.auto_awesome, color: Colors.grey[300], size: 64),
-                        const SizedBox(height: 16),
-                        Text(
-                          "Your ${_titles[_selectedIndex]} will appear here.",
-                          style: TextStyle(color: Colors.grey[400], fontSize: 16),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
+      backgroundColor: Colors.white,
+      // IndexedStack keeps the state of each tab alive when you switch back and forth
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: (index) => setState(() => _selectedIndex = index),
+        onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: const Color(0xFF2563EB),
         unselectedItemColor: Colors.grey[400],
-        showUnselectedLabels: true,
-        backgroundColor: Colors.white,
-        elevation: 0, // Flat design for modern look
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet_outlined), label: 'My Pools'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'Activity'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment_outlined), label: "My Pools"),
+          BottomNavigationBarItem(icon: Icon(Icons.notifications_none_rounded), label: "Activity"),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: "Profile"),
         ],
       ),
     );
   }
 
-  // --- HELPER METHODS ---
+  // 2. THE DASHBOARD UI (Actions + Recent Activity)
+  Widget _buildHomeBody() {
+    return SafeArea(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text("Hello, @username", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+            const Text("Ready to split the bill?", style: TextStyle(color: Colors.grey)),
+            
+            const SizedBox(height: 32),
+            
+            // --- ACTION CARDS ---
+            _buildActionCard(
+              title: "Create a Pool",
+              subtitle: "Start a session and invite friends",
+              icon: Icons.add_circle_outline,
+              color: const Color(0xFF2563EB),
+              onTap: () => Navigator.pushNamed(context, '/create-pool'),
+            ),
+            const SizedBox(height: 16),
+            _buildActionCard(
+              title: "Join a Pool",
+              subtitle: "Enter a code or scan a QR",
+              icon: Icons.qr_code_scanner,
+              color: const Color(0xFF06B6D4),
+              onTap: () {},
+            ),
+            
+            const SizedBox(height: 40),
 
-  Widget _buildMainActionCard(
-    BuildContext context, {
-    required String title,
-    required String subtitle,
-    required IconData icon,
-    required List<Color> gradient,
-    required VoidCallback onTap,
-  }) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          gradient: LinearGradient(colors: gradient),
-          boxShadow: [
-            BoxShadow(
-              color: gradient[0].withOpacity(0.25),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
+            // --- RECENT ACTIVITY SECTION ---
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Recent Activity", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                TextButton(
+                  onPressed: () {}, 
+                  child: const Text("See All", style: TextStyle(color: Color(0xFF2563EB)))
+                ),
+              ],
+            ),
+            
+            const SizedBox(height: 8),
+
+            _buildRecentActivityItem(
+              title: "Friday Pork Joint",
+              amount: "14,500",
+              date: "Today, 4:30 AM",
+              icon: Icons.celebration_outlined,
+              color: Colors.orange,
+            ),
+            const SizedBox(height: 12),
+            _buildRecentActivityItem(
+              title: "Boda Boda Ride",
+              amount: "6,000",
+              date: "Yesterday",
+              icon: Icons.moped_outlined,
+              color: const Color(0xFF06B6D4),
+            ),
+            const SizedBox(height: 12),
+            _buildRecentActivityItem(
+              title: "KFC Lunch",
+              amount: "25,000",
+              date: "24 Mar 2026",
+              icon: Icons.fastfood_outlined,
+              color: const Color(0xFF2563EB),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // --- UI HELPERS ---
+
+  Widget _buildActionCard({required String title, required String subtitle, required IconData icon, required Color color, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [BoxShadow(color: color.withOpacity(0.3), blurRadius: 12, offset: const Offset(0, 6))],
+        ),
         child: Row(
           children: [
-            Icon(icon, color: Colors.white, size: 36),
+            Icon(icon, color: Colors.white, size: 32),
             const SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title, 
-                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle, 
-                    style: TextStyle(color: Colors.white.withOpacity(0.85), fontSize: 14)
-                  ),
+                  Text(title, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+                  Text(subtitle, style: const TextStyle(color: Colors.white70, fontSize: 13)),
                 ],
               ),
             ),
@@ -178,36 +158,32 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildRecentPoolItem(String title, String subtitle, String amount) {
+  Widget _buildRecentActivityItem({required String title, required String amount, required String date, required IconData icon, required Color color}) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: const Color(0xFFF8FAFC), 
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        border: Border.all(color: const Color(0xFFE2E8F0).withOpacity(0.5)),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF1E293B))),
-              const SizedBox(height: 4),
-              Text(subtitle, style: TextStyle(color: Colors.grey[500], fontSize: 13)),
-            ],
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+            child: Icon(icon, color: color, size: 20),
           ),
-          Text(
-            amount, 
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Color(0xFF2563EB))
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                Text(date, style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+              ],
+            ),
           ),
+          Text("UGX $amount", style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
         ],
       ),
     );
