@@ -13,6 +13,7 @@ import 'features/auth/screens/percentage_split_config_screen.dart';
 import 'features/auth/screens/wallet_split_config_screen.dart';
 import 'features/auth/screens/equal_split_config_screen.dart';
 import 'features/auth/screens/item_claim_screen.dart';
+import 'features/auth/screens/merchant_payment_screen.dart';
 import 'features/auth/screens/payment_selection_screen.dart';
 void main() {
   // We removed 'async' and 'Firebase' for now to keep things moving!
@@ -63,6 +64,7 @@ class TemamuApp extends StatelessWidget {
           '/equal-split': (context) => const EqualSplitConfigScreen(),
           '/item-claim': (context) => const ItemClaimScreen(),
           '/payment-selection': (context) => const PaymentSelectionScreen(),
+          '/merchant-pay': (context) => const MerchantPaymentScreen(),
       },
     );
   }

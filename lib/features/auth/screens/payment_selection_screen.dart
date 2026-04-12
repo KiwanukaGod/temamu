@@ -81,7 +81,11 @@ class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     // Navigate to the final verification/payment execution screen
-                    Navigator.pushNamed(context, '/settlement-verification');
+                    if (_selectedMethod == "Merchant") {
+                      Navigator.pushNamed(context, '/merchant-pay');
+                    } else {
+                      Navigator.pushNamed(context, '/manual-pay');
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2563EB),
