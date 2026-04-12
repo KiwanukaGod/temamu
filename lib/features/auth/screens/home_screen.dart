@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:temamu/features/auth/screens/my_pools_screen.dart';
 import 'notifications_screen.dart'; // Ensure this file exists!
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // 1. THE TAB CONTROLLER
   late final List<Widget> _screens = [
     _buildHomeBody(),              // Index 0: Dashboard (Actions + Activity)
-    const Center(child: Text("My Pools coming soon")), // Index 1
+    const MyPoolsScreen(),
     const NotificationsScreen(),    // Index 2: THE NEW NOTIFICATIONS TAB
     const Center(child: Text("Profile coming soon")),  // Index 3
   ];
