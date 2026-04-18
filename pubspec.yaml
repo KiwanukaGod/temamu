@@ -88,3 +88,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+shared_preferences: ^2.2.2
+ # For storing user data locally on the device. 
