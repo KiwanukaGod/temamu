@@ -53,7 +53,7 @@ class _ItemClaimScreenState extends State<ItemClaimScreen> {
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: Colors.white,
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -4))],
+              boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10, offset: const Offset(0, -4))],
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -102,7 +102,7 @@ class _ItemClaimScreenState extends State<ItemClaimScreen> {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isClaimedByMe ? const Color(0xFF2563EB).withOpacity(0.05) : Colors.white,
+          color: isClaimedByMe ? const Color(0xFF2563EB).withValues(alpha: 0.05) : Colors.white,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
             color: isClaimedByMe ? const Color(0xFF2563EB) : const Color(0xFFE2E8F0),

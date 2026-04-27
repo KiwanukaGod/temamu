@@ -1,0 +1,106 @@
+PODS:
+  - Firebase/Auth (12.12.1):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 12.12.0)
+  - Firebase/CoreOnly (12.12.1):
+    - FirebaseCore (~> 12.12.1)
+  - firebase_auth (6.4.0):
+    - Firebase/Auth (~> 12.12.0)
+    - Firebase/CoreOnly (~> 12.12.0)
+    - firebase_core
+    - FlutterMacOS
+  - firebase_core (4.7.0):
+    - Firebase/CoreOnly (~> 12.12.0)
+    - FlutterMacOS
+  - FirebaseAppCheckInterop (12.12.0)
+  - FirebaseAuth (12.12.0):
+    - FirebaseAppCheckInterop (~> 12.12.0)
+    - FirebaseAuthInterop (~> 12.12.0)
+    - FirebaseCore (~> 12.12.0)
+    - FirebaseCoreExtension (~> 12.12.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 8.1)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GTMSessionFetcher/Core (< 6.0, >= 3.4)
+    - RecaptchaInterop (~> 101.0)
+  - FirebaseAuthInterop (12.12.0)
+  - FirebaseCore (12.12.1):
+    - FirebaseCoreInternal (~> 12.12.0)
+    - GoogleUtilities/Environment (~> 8.1)
+    - GoogleUtilities/Logger (~> 8.1)
+  - FirebaseCoreExtension (12.12.0):
+    - FirebaseCore (~> 12.12.0)
+  - FirebaseCoreInternal (12.12.0):
+    - "GoogleUtilities/NSData+zlib (~> 8.1)"
+  - FlutterMacOS (1.0.0)
+  - GoogleUtilities/AppDelegateSwizzler (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Environment (8.1.0):
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Logger (8.1.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Network (8.1.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Privacy
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (8.1.0)":
+    - GoogleUtilities/Privacy
+  - GoogleUtilities/Privacy (8.1.0)
+  - GoogleUtilities/Reachability (8.1.0):
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Privacy
+  - GTMSessionFetcher/Core (5.2.0)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - firebase_auth (from `Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos`)
+  - firebase_core (from `Flutter/ephemeral/.symlinks/plugins/firebase_core/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - shared_preferences_foundation (from `Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin`)
+
+SPEC REPOS:
+  trunk:
+    - Firebase
+    - FirebaseAppCheckInterop
+    - FirebaseAuth
+    - FirebaseAuthInterop
+    - FirebaseCore
+    - FirebaseCoreExtension
+    - FirebaseCoreInternal
+    - GoogleUtilities
+    - GTMSessionFetcher
+
+EXTERNAL SOURCES:
+  firebase_auth:
+    :path: Flutter/ephemeral/.symlinks/plugins/firebase_auth/macos
+  firebase_core:
+    :path: Flutter/ephemeral/.symlinks/plugins/firebase_core/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  shared_preferences_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/shared_preferences_foundation/darwin
+
+SPEC CHECKSUMS:
+  Firebase: 14f11e91129d246a8a6166b4c1c2ea61b56806ec
+  firebase_auth: 889d00265b2789b54ad2bd7cefb62d9d4aec024a
+  firebase_core: 8022171e82601bac2c79cfa04d69977f12595682
+  FirebaseAppCheckInterop: c63ae0d003274f145174849c545ab861593beaf9
+  FirebaseAuth: bcfebbc0ca055a6335f2252a90e57363d7ea5e65
+  FirebaseAuthInterop: 917aa3a17ecf144d5f1823b51ef372da06909a4b
+  FirebaseCore: 86241206e656f5c80c995e370e6c975913b9b284
+  FirebaseCoreExtension: ff6fd42eb5287e71d3e160450de6509733d9ead7
+  FirebaseCoreInternal: 7c12fc3011d889085e765e317d7b9fd1cef97af9
+  FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
+  GoogleUtilities: 00c88b9a86066ef77f0da2fab05f65d7768ed8e1
+  GTMSessionFetcher: 904bdd2a82c635bcd6f44edf94cc8775c5d1d6e6
+  shared_preferences_foundation: 7036424c3d8ec98dfe75ff1667cb0cd531ec82bb
+
+PODFILE CHECKSUM: 54d867c82ac51cbd61b565781b9fada492027009
+
+COCOAPODS: 1.16.2

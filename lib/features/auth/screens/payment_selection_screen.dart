@@ -116,7 +116,7 @@ class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.05) : Colors.white,
+          color: isSelected ? color.withValues(alpha: 0.05) : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isSelected ? color : const Color(0xFFE2E8F0),
@@ -127,7 +127,7 @@ class _PaymentSelectionScreenState extends State<PaymentSelectionScreen> {
           children: [
             Container(
               padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+              decoration: BoxDecoration(color: color.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(12)),
               child: Icon(icon, color: color),
             ),
             const SizedBox(width: 16),

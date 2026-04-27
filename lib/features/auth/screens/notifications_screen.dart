@@ -57,15 +57,15 @@ class NotificationsScreen extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isUnread ? color.withOpacity(0.03) : Colors.white,
+        color: isUnread ? color.withValues(alpha: 0.03) : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: isUnread ? color.withOpacity(0.2) : const Color(0xFFE2E8F0)),
+        border: Border.all(color: isUnread ? color.withValues(alpha: 0.2) : const Color(0xFFE2E8F0)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CircleAvatar(
-            backgroundColor: color.withOpacity(0.1),
+            backgroundColor: color.withValues(alpha: 0.1),
             child: Icon(icon, color: color, size: 20),
           ),
           const SizedBox(width: 16),

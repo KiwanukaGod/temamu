@@ -88,7 +88,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF2563EB).withOpacity(0.2),
+                        color: const Color(0xFF2563EB).withValues(alpha: 0.2),
                         blurRadius: 12,
                         offset: const Offset(0, 6),
                       )
@@ -146,7 +146,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
         margin: const EdgeInsets.only(bottom: 10), // Balanced spacing between cards
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF2563EB).withOpacity(0.05) : Colors.white,
+          color: isSelected ? const Color(0xFF2563EB).withValues(alpha: 0.05) : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected ? const Color(0xFF2563EB) : const Color(0xFFE2E8F0),

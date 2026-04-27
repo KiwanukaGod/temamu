@@ -36,7 +36,7 @@ class _MerchantPaymentScreenState extends State<MerchantPaymentScreen> {
               style: const TextStyle(color: Colors.white, letterSpacing: 8, fontSize: 24),
               decoration: InputDecoration(
                 filled: true,
-                fillColor: Colors.white.withOpacity(0.1),
+                fillColor: Colors.white.withValues(alpha: 0.1),
                 border: const OutlineInputBorder(borderSide: BorderSide.none),
               ),
             ),

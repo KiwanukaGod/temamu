@@ -122,7 +122,7 @@ class _PoolLobbyScreenState extends State<PoolLobbyScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             decoration: BoxDecoration(
-              color: isReady ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+              color: isReady ? Colors.green.withValues(alpha: 0.1) : Colors.orange.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(

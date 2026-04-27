@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "187680912728",
+    "project_id": "temamu-904e3",
+    "storage_bucket": "temamu-904e3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187680912728:android:0697a921a921ef64f9212d",
+        "android_client_info": {
+          "package_name": "com.example.temamu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWGp1SD4hs0CHoDDj5QlHR0Tc_vQeCHFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

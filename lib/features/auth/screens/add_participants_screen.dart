@@ -119,7 +119,7 @@ class _AddParticipantsScreenState extends State<AddParticipantsScreen> {
       child: Row(
         children: [
           CircleAvatar(
-            backgroundColor: hasApp ? const Color(0xFF2563EB).withOpacity(0.1) : Colors.grey[200],
+            backgroundColor: hasApp ? const Color(0xFF2563EB).withValues(alpha: 0.1) : Colors.grey[200],
             child: Text(
               contact['name'][0], 
               style: TextStyle(color: hasApp ? const Color(0xFF2563EB) : Colors.grey[600], fontWeight: FontWeight.bold)
