@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:temamu/core/services/session_service.dart';
 import 'package:temamu/features/auth/screens/my_pools_screen.dart';
+import 'package:temamu/features/auth/screens/activity_screen.dart';
+import 'package:temamu/features/auth/screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,7 +15,12 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   // Tabs for the Bottom Navigation
-  late final List<Widget> _screens = [_buildHomeBody(), const MyPoolsScreen()];
+  late final List<Widget> _screens = [
+    _buildHomeBody(),
+    const MyPoolsScreen(),
+    const ActivityScreen(),
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {

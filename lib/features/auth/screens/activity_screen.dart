@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class NotificationsScreen extends StatelessWidget {
-  const NotificationsScreen({super.key});
+class ActivityScreen extends StatelessWidget {
+  const ActivityScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Notifications", style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
+        title: const Text(
+          "Activity Center",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF1E293B),
+          ),
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -59,7 +65,11 @@ class NotificationsScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: isUnread ? color.withValues(alpha: 0.03) : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: isUnread ? color.withValues(alpha: 0.2) : const Color(0xFFE2E8F0)),
+        border: Border.all(
+          color: isUnread
+              ? color.withValues(alpha: 0.2)
+              : const Color(0xFFE2E8F0),
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,12 +86,28 @@ class NotificationsScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-                    Text(time, style: TextStyle(color: Colors.grey[400], fontSize: 11)),
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      time,
+                      style: TextStyle(color: Colors.grey[400], fontSize: 11),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 4),
-                Text(message, style: TextStyle(color: Colors.grey[600], fontSize: 13, height: 1.4)),
+                Text(
+                  message,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 13,
+                    height: 1.4,
+                  ),
+                ),
               ],
             ),
           ),
