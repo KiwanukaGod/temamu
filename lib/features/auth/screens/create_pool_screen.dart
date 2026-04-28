@@ -8,7 +8,43 @@ class CreatePoolScreen extends StatefulWidget {
 }
 
 class _CreatePoolScreenState extends State<CreatePoolScreen> {
-  String selectedMethod = 'Equal'; 
+  final TextEditingController _poolNameController = TextEditingController();
+  final List<String> _selectedFriends = [];
+
+  // Mock data for contacts - in production this would come from the phone's contact list
+  final List<String> _contacts = [
+    "Sarah Namuli",
+    "John Musoke",
+    "Alex Mukasa",
+    "Ivan Kato",
+    "Maria Okecho",
+    "Pius Wandera",
+  ];
+
+  @override
+  void dispose() {
+    _poolNameController.dispose();
+    super.dispose();
+  }
+
+  void _onContinue() {
+    if (_poolNameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please give your pool a name first")),
+      );
+      return;
+    }
+
+    // Proceed to Split Method Selection
+    Navigator.pushNamed(
+      context,
+      '/select-split-method',
+      arguments: {
+        'poolName': _poolNameController.text,
+        'participants': _selectedFriends,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,174 +52,245 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          "New Payment Pool", 
-          style: TextStyle(color: Color(0xFF1E293B), fontWeight: FontWeight.bold, fontSize: 18)
+          "Start a New Pool",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF1E293B),
+          ),
         ),
+        centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 16), // Padding from AppBar
-
-              // --- SECTION 1: THE BASICS ---
-              const Text(
-                "The Basics", 
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
-              ),
-              const SizedBox(height: 16),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: "Pool Title",
-                  hintText: "e.g., Friday Pork Joint",
-                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-                  prefixIcon: Icon(Icons.celebration_outlined, size: 22),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const TextField(
-                decoration: InputDecoration(
-                  labelText: "Total Bill Amount",
-                  hintText: "UGX 0.00",
-                  border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(12))),
-                  prefixIcon: Icon(Icons.account_balance_wallet_outlined, size: 22),
-                ),
-                keyboardType: TextInputType.number,
-              ),
-
-              // --- THE REQUESTED GAP ---
-              // This 40px gap creates the "Section Break" you're looking for
-              const SizedBox(height: 40), 
-
-              // --- SECTION 2: CHOOSE OPTION ---
-              const Text(
-                "Choose Split Method", 
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF2563EB))
-              ),
-              const SizedBox(height: 16),
-              
-              _buildSplitOption("Equal", "Everyone pays the same", Icons.groups_outlined),
-              _buildSplitOption("Itemized", "Pick what you ate", Icons.receipt_long_outlined),
-              _buildSplitOption("Percentage", "Split by responsibility", Icons.percent_outlined),
-              _buildSplitOption("Shared Wallet", "Groups pay together", Icons.account_balance_outlined),
-
-              // Pushes the button to the bottom while respecting the content above
-              const Spacer(), 
-
-              // --- ACTION BUTTON ---
-              SizedBox(
-                width: double.infinity,
-                height: 58,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFF2563EB), Color(0xFF06B6D4)],
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF2563EB).withValues(alpha: 0.2),
-                        blurRadius: 12,
-                        offset: const Offset(0, 6),
-                      )
-                    ]
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                        // THE TRAFFIC CONTROLLER LOGIC
-                       switch (selectedMethod) {
-                          case 'Equal':
-                            Navigator.pushNamed(context, '/equal-split');
-                          break;
-      
-                          case 'Itemized':
-                            Navigator.pushNamed(context, '/itemized-config');
-                          break;
-      
-                          case 'Percentage':
-                            Navigator.pushNamed(context, '/percentage-config');
-                          break;
-      
-                          case 'Shared Wallet':
-                            Navigator.pushNamed(context, '/wallet-config');
-                          break;
-      
-                          default:
-                          Navigator.pushNamed(context, '/host-invite');
-                        }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    ),
-                    child: const Text(
-                      "Continue", 
-                      style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16), // Margin below button
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSplitOption(String title, String subtitle, IconData icon) {
-    bool isSelected = selectedMethod == title;
-    return GestureDetector(
-      onTap: () => setState(() => selectedMethod = title),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 10), // Balanced spacing between cards
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFF2563EB).withValues(alpha: 0.05) : Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSelected ? const Color(0xFF2563EB) : const Color(0xFFE2E8F0),
-            width: isSelected ? 1.5 : 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Icon(
-              icon, 
-              color: isSelected ? const Color(0xFF2563EB) : Colors.grey[400], 
-              size: 22
-            ),
-            const SizedBox(width: 16),
-            Expanded(
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title, 
+                  // --- SECTION 1: POOL NAME ---
+                  const Text(
+                    "What are we splitting?",
                     style: TextStyle(
-                      fontWeight: FontWeight.bold, 
-                      fontSize: 15,
-                      color: isSelected ? const Color(0xFF2563EB) : const Color(0xFF1E293B)
-                    )
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Color(0xFF1E293B),
+                    ),
                   ),
-                  Text(
-                    subtitle, 
-                    style: TextStyle(color: Colors.grey[500], fontSize: 12)
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: _poolNameController,
+                    decoration: InputDecoration(
+                      hintText: "e.g. Friday Pork Joint",
+                      filled: true,
+                      fillColor: const Color(0xFFF8FAFC),
+                      prefixIcon: const Icon(
+                        Icons.edit_note,
+                        color: Color(0xFF2563EB),
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
                   ),
+
+                  const SizedBox(height: 32),
+
+                  // --- SECTION 2: ADD PARTICIPANTS ---
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Add Participants",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Color(0xFF1E293B),
+                        ),
+                      ),
+                      Text(
+                        "${_selectedFriends.length} selected",
+                        style: const TextStyle(
+                          color: Color(0xFF2563EB),
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Search Input
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Search contacts...",
+                      prefixIcon: const Icon(Icons.search, size: 20),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                        borderSide: const BorderSide(color: Color(0xFFE2E8F0)),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // --- HORIZONTAL LIST OF SELECTED FRIENDS ---
+                  if (_selectedFriends.isNotEmpty)
+                    SizedBox(
+                      height: 90,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _selectedFriends.length,
+                        itemBuilder: (context, index) {
+                          final name = _selectedFriends[index];
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 16),
+                            child: Column(
+                              children: [
+                                Stack(
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 28,
+                                      backgroundColor: const Color(
+                                        0xFF2563EB,
+                                      ).withOpacity(0.1),
+                                      child: Text(
+                                        name[0],
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xFF2563EB),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 0,
+                                      top: 0,
+                                      child: GestureDetector(
+                                        onTap: () => setState(
+                                          () => _selectedFriends.remove(name),
+                                        ),
+                                        child: Container(
+                                          padding: const EdgeInsets.all(2),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: const Icon(
+                                            Icons.close,
+                                            size: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  name.split(" ")[0],
+                                  style: const TextStyle(fontSize: 11),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+
+                  const Divider(height: 40, color: Color(0xFFF1F5F9)),
+
+                  // --- LIST OF CONTACTS ---
+                  const Text(
+                    "Suggested Contacts",
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  ..._contacts.map((name) {
+                    bool isSelected = _selectedFriends.contains(name);
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: CircleAvatar(
+                        backgroundColor: const Color(0xFFF1F5F9),
+                        child: Text(
+                          name[0],
+                          style: const TextStyle(color: Color(0xFF1E293B)),
+                        ),
+                      ),
+                      title: Text(
+                        name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                        ),
+                      ),
+                      trailing: Checkbox(
+                        value: isSelected,
+                        activeColor: const Color(0xFF2563EB),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        onChanged: (val) {
+                          setState(() {
+                            if (val == true) {
+                              _selectedFriends.add(name);
+                            } else {
+                              _selectedFriends.remove(name);
+                            }
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
                 ],
               ),
             ),
-            if (isSelected) 
-              const Icon(Icons.check_circle_rounded, color: Color(0xFF2563EB), size: 20),
-          ],
-        ),
+          ),
+
+          // --- FOOTER ACTION ---
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, -4),
+                ),
+              ],
+            ),
+            child: SizedBox(
+              width: double.infinity,
+              height: 58,
+              child: ElevatedButton(
+                onPressed: _onContinue,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2563EB),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 0,
+                ),
+                child: const Text(
+                  "Choose Split Method",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

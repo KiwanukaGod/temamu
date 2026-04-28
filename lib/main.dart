@@ -5,6 +5,7 @@ import 'features/auth/screens/sign_up_screen.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/home_screen.dart';
 import 'core/services/otp_screen.dart';
+import 'features/auth/screens/create_pool_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -12,9 +13,7 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const TemamuApp());
 }
@@ -27,13 +26,10 @@ class TemamuApp extends StatelessWidget {
     return MaterialApp(
       title: 'Temamu',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: true,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
       // 1. The app starts at the Splash Screen
-      initialRoute: '/', 
-      
+      initialRoute: '/',
+
       // 2. This is the "Map" the error was looking for
       routes: {
         '/': (context) => const SplashScreen(),
@@ -41,6 +37,9 @@ class TemamuApp extends StatelessWidget {
         '/otp': (context) => const OtpScreen(),
         '/home': (context) => const HomeScreen(),
         '/login': (context) => const LoginScreen(),
+
+        // Add more routes here as you create new screens
+        '/create-pool': (context) => const CreatePoolScreen(),
       },
     );
   }
