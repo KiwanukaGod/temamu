@@ -6,6 +6,7 @@ import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/home_screen.dart';
 import 'core/services/otp_screen.dart';
 import 'features/auth/screens/create_pool_screen.dart';
+import 'features/auth/screens/select_split_method_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -37,9 +38,8 @@ class TemamuApp extends StatelessWidget {
         '/otp': (context) => const OtpScreen(),
         '/home': (context) => const HomeScreen(),
         '/login': (context) => const LoginScreen(),
-
-        // Add more routes here as you create new screens
         '/create-pool': (context) => const CreatePoolScreen(),
+        '/select-split-method': (context) => const SelectSplitMethodScreen(),
       },
     );
   }
