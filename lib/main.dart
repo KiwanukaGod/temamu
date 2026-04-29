@@ -7,6 +7,10 @@ import 'features/auth/screens/home_screen.dart';
 import 'core/services/otp_screen.dart';
 import 'features/auth/screens/create_pool_screen.dart';
 import 'features/auth/screens/select_split_method_screen.dart';
+import 'features/auth/screens/equal_split_config_screen.dart';
+import 'features/auth/screens/itemized_split_config_screen.dart';
+import 'features/auth/screens/percentage_split_config_screen.dart';
+import 'features/auth/screens/wallet_split_config_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -38,8 +42,16 @@ class TemamuApp extends StatelessWidget {
         '/otp': (context) => const OtpScreen(),
         '/home': (context) => const HomeScreen(),
         '/login': (context) => const LoginScreen(),
+
+        // Pool creation flow
         '/create-pool': (context) => const CreatePoolScreen(),
         '/select-split-method': (context) => const SelectSplitMethodScreen(),
+        '/equal-split-config': (context) => const EqualSplitConfigScreen(),
+        '/itemized-split-config': (context) =>
+            const ItemizedSplitConfigScreen(),
+        '/percentage-split-config': (context) =>
+            const PercentageSplitConfigScreen(),
+        '/wallet-split-config': (context) => const WalletSplitConfigScreen(),
       },
     );
   }
