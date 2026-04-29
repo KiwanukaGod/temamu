@@ -17,6 +17,7 @@ import 'package:temamu/features/pool/screens/attach_receipt_screen.dart';
 import 'package:temamu/features/pool/screens/pool_recap_screen.dart';
 import 'package:temamu/features/pool/screens/manual_payment_screen.dart';
 import 'package:temamu/features/pool/screens/congratulations_screen.dart';
+import 'package:temamu/features/pool/screens/join_pool_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -63,6 +64,7 @@ class TemamuApp extends StatelessWidget {
         '/pool-recap': (context) => const PoolRecapScreen(),
         '/manual-payment': (context) => const ManualPaymentScreen(),
         '/congratulations': (context) => const CongratulationsScreen(),
+        '/join-pool': (context) => const JoinPoolScreen(),
       },
     );
   }
