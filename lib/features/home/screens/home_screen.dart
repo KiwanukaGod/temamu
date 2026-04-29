@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:temamu/core/services/session_service.dart';
-import 'package:temamu/features/auth/screens/my_pools_screen.dart';
-import 'package:temamu/features/auth/screens/activity_screen.dart';
-import 'package:temamu/features/auth/screens/profile_screen.dart';
+import 'package:temamu/features/home/screens/my_pools_screen.dart';
+import 'package:temamu/features/home/screens/activity_screen.dart';
+import 'package:temamu/features/home/screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

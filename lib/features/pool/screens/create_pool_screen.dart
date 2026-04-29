@@ -155,7 +155,7 @@ class _CreatePoolScreenState extends State<CreatePoolScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            ..._contacts.map((name) => _buildContactListTile(name)).toList(),
+            ..._contacts.map((name) => _buildContactListTile(name)),
 
             const SizedBox(height: 40),
 

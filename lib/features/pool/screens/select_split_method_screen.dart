@@ -41,7 +41,7 @@ class _SelectSplitMethodScreenState extends State<SelectSplitMethodScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Receiving data from CreatePoolScreen
+    // 1. Reverted to expecting a Map since we are using basic static routes
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final String poolName = args['poolName'] ?? "New Pool";
@@ -54,7 +54,7 @@ class _SelectSplitMethodScreenState extends State<SelectSplitMethodScreen> {
           "Split Method",
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Color(0xFF1E293B),
+            color: Color(0xFF1E293B), // Slate Navy
           ),
         ),
         centerTitle: true,
@@ -75,7 +75,7 @@ class _SelectSplitMethodScreenState extends State<SelectSplitMethodScreen> {
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2563EB),
+                    color: Color(0xFF2563EB), // Action Blue
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -176,39 +176,20 @@ class _SelectSplitMethodScreenState extends State<SelectSplitMethodScreen> {
               height: 58,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigate based on selected method
-                  String route;
-                  switch (_selectedMethod) {
-                    case 'Equal':
-                      route = '/equal-split-config';
-                      break;
-                    case 'Itemized':
-                      route = '/itemized-split-config';
-                      break;
-                    case 'Percentage':
-                      route = '/percentage-split-config';
-                      break;
-                    case 'Shared Wallet':
-                      route = '/wallet-split-config';
-                      break;
-                    default:
-                      route = '/pool-lobby'; // fallback
-                  }
-
+                  // 2. We skip the Switch statement entirely and route straight to Lobby
                   Navigator.pushNamed(
                     context,
-                    route,
+                    '/pool-lobby',
                     arguments: {
                       'poolName': poolName,
                       'participants': participants,
-                      'method': _selectedMethod,
+                      'method':
+                          _selectedMethod, // Adding the chosen method to the Map
                     },
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(
-                    0xFF1E293B,
-                  ), // Dark Navy for "Finalizing" actions
+                  backgroundColor: const Color(0xFF2563EB), // Action Blue
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),

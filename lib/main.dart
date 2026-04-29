@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:temamu/core/theme/app_theme.dart';
 // Import your screens here - adjust paths based on your folder structure
 import 'features/auth/screens/splash_screen.dart';
 import 'features/auth/screens/sign_up_screen.dart';
 import 'features/auth/screens/login_screen.dart';
-import 'features/auth/screens/home_screen.dart';
+import 'features/home/screens/home_screen.dart';
 import 'core/services/otp_screen.dart';
-import 'features/auth/screens/create_pool_screen.dart';
-import 'features/auth/screens/select_split_method_screen.dart';
-import 'features/auth/screens/equal_split_config_screen.dart';
-import 'features/auth/screens/itemized_split_config_screen.dart';
-import 'features/auth/screens/percentage_split_config_screen.dart';
-import 'features/auth/screens/wallet_split_config_screen.dart';
+import 'features/pool/screens/create_pool_screen.dart';
+import 'features/pool/screens/select_split_method_screen.dart';
+import 'features/pool/screens/equal_split_config_screen.dart';
+import 'features/pool/screens/itemized_split_config_screen.dart';
+import 'features/pool/screens/percentage_split_config_screen.dart';
+import 'features/pool/screens/wallet_split_config_screen.dart';
+import 'package:temamu/features/pool/screens/pool_lobby_screen.dart';
+import 'package:temamu/features/pool/screens/attach_receipt_screen.dart';
+import 'package:temamu/features/pool/screens/pool_recap_screen.dart';
+import 'package:temamu/features/pool/screens/manual_payment_screen.dart';
+import 'package:temamu/features/pool/screens/congratulations_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -31,13 +37,13 @@ class TemamuApp extends StatelessWidget {
     return MaterialApp(
       title: 'Temamu',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+      theme: TemamuTheme.theme,
       // 1. The app starts at the Splash Screen
-      initialRoute: '/',
+      initialRoute: '/splash',
 
       // 2. This is the "Map" the error was looking for
       routes: {
-        '/': (context) => const SplashScreen(),
+        '/splash': (context) => const SplashScreen(),
         '/sign-up': (context) => const SignUpScreen(),
         '/otp': (context) => const OtpScreen(),
         '/home': (context) => const HomeScreen(),
@@ -52,6 +58,11 @@ class TemamuApp extends StatelessWidget {
         '/percentage-split-config': (context) =>
             const PercentageSplitConfigScreen(),
         '/wallet-split-config': (context) => const WalletSplitConfigScreen(),
+        '/pool-lobby': (context) => const PoolLobbyScreen(),
+        '/attach-receipt': (context) => const AttachReceiptScreen(),
+        '/pool-recap': (context) => const PoolRecapScreen(),
+        '/manual-payment': (context) => const ManualPaymentScreen(),
+        '/congratulations': (context) => const CongratulationsScreen(),
       },
     );
   }
